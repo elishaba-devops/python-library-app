@@ -7,7 +7,7 @@ services:
       - "3306:3306"
     networks:
       - mynetwork
-  auth:
+  auth_service:
     image: elishababoddu2615/pyapp:auth_image
     deploy:
       replicas: 1
@@ -17,7 +17,7 @@ services:
       - db
      networks:
       - mynetwork
-  book:
+  book_service:
     image: elishababoddu2615/pyapp:book_image
     deploy:
       replicas: 1
@@ -27,7 +27,7 @@ services:
       - db
      networks:
       - mynetwork
-  borrow:
+  borrow_service:
     image: elishababoddu2615/pyapp:borrow_image
     deploy:
       replicas: 1
