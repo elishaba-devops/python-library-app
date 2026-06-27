@@ -13,42 +13,42 @@ services:
       replicas: 1
     ports:
       - "5001:5001"
+    networks:
+      - mynetwork
     depends_on:
       - db
-     networks:
-      - mynetwork
   book_service:
     image: elishababoddu2615/pyapp:book_image
     deploy:
       replicas: 1
     ports:
       - "5002:5002"
+    networks:
+      - mynetwork
     depends_on:
       - db
-     networks:
-      - mynetwork
   borrow_service:
     image: elishababoddu2615/pyapp:borrow_image
     deploy:
       replicas: 1
     ports:
       - "5003:5003"
+    networks:
+      - mynetwork
     depends_on:
       - db
-     networks:
-      - mynetwork
   frontend:
     image: elishababoddu2615/pyapp:frontend
     deploy:
       replicas: 1
     ports:
       - "5000:5000"
+    networks:
+      - mynetwork
     depends_on:
       - auth
       - book
       - borrow
-     networks:
-      - mynetwork
 
   networks:
     mynetwork:
