@@ -1,0 +1,55 @@
+services:
+  db:
+    image: elishababoddu2615/pyapp:db_image
+    deploy:
+      replicas: 1
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+  auth:
+    image: elishababoddu2615/pyapp:auth_image
+    deploy:
+      replicas: 1
+    ports:
+      - "5001:5001"
+    depends_on:
+      - db
+     networks:
+      - mynetwork
+  book:
+    image: elishababoddu2615/pyapp:book_image
+    deploy:
+      replicas: 1
+    ports:
+      - "5002:5002"
+    depends_on:
+      - db
+     networks:
+      - mynetwork
+  borrow:
+    image: elishababoddu2615/pyapp:borrow_image
+    deploy:
+      replicas: 1
+    ports:
+      - "5003:5003"
+    depends_on:
+      - db
+     networks:
+      - mynetwork
+  frontend:
+    image: elishababoddu2615/pyapp:frontend
+    deploy:
+      replicas: 1
+    ports:
+      - "5000:5000"
+    depends_on:
+      - auth
+      - book
+      - borrow
+     networks:
+      - mynetwork
+
+  networks:
+    mynetwork:
+      driver: overlay
